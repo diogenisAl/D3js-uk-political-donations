@@ -315,18 +315,79 @@ function mouseover(d, i) {
 	var party = d.partyLabel;
 	var entity = d.entityLabel;
 	var offset = $("svg").offset();
-	var infoBox = "<p> Source: <b>" + donor + "</b></p>"
-								+ "<p> Recipient: <b>" + party + "</b></p>"
+	
+	var image = new Image();
+	
+	image.onload = function() {
+    	// image exists and is loaded
+    	document.body.appendChild(image);
+	}
+	image.onerror = function() {
+    	// image did not load
+
+    	var err = new Image();
+    	err.src = 'https://github.com/favicon.ico';
+
+    	document.body.appendChild(err);
+	}
+	
+	image.src = "https://raw.githubusercontent.com/Rakoon12/D3js-uk-political-donations/master/photos/" + donor + ".ico";
+	
+	// *******************************************
+	
+	function checkImageExists(imageUrl, callBack) {
+	var imageData = new Image();
+	imageData.onload = function() {
+	callBack(true);
+	};
+	imageData.onerror = function() {
+	callBack(false);
+	};
+	imageData.src = imageUrl;
+	}
+
+	// image url that want to check
+	var imageFile = "https://raw.githubusercontent.com/Rakoon12/D3js-uk-political-donations/master/photos/" + donor + ".ico";
+
+	checkImageExists(imageFile, function(existsImage) {
+	if(existsImage == true) {
+	// image exist
+	}
+	else {
+	// image does not exist
+	imageFile = 'https://github.com/favicon.ico';
+	}
+	});
+	
+	// *******************************************
+	
+	
+	
+
+	
+	tooltip.append("img")
+                    .attr("src",imageFile)
+                    .attr("x", 1050)
+                    .attr("y", 950)
+                    .attr("width","42px")                  
+                    .attr("height","42px"); 
+            tooltip.style("visibility", "visible");
+	
+	var infoBox = "<p> Source: <b>" + donor + "</b> " +  "<span><img src='" + imageFile + "' height='42' width='42' onError='this.src=\"https://github.com/favicon.ico\";'></span></p>" 	
+	
+	 							+ "<p> Recipient: <b>" + party + "</b></p>"
 								+ "<p> Type of donor: <b>" + entity + "</b></p>"
 								+ "<p> Total value: <b>&#163;" + comma(amount) + "</b></p>";
-
-
+	
+	
 	mosie.classed("active", true);
 	d3.select(".tooltip")
   	.style("left", (parseInt(d3.select(this).attr("cx") - 80) + offset.left) + "px")
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
+	
+	
 	}
 
 function mouseout() {
