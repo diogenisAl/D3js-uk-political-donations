@@ -316,25 +316,11 @@ function mouseover(d, i) {
 	var entity = d.entityLabel;
 	var offset = $("svg").offset();
 	
-	var image = new Image();
-	
-	image.onload = function() {
-    	// image exists and is loaded
-    	document.body.appendChild(image);
-	}
-	image.onerror = function() {
-    	// image did not load
 
-    	var err = new Image();
-    	err.src = 'https://github.com/favicon.ico';
 
-    	document.body.appendChild(err);
-	}
-	
-	image.src = "https://raw.githubusercontent.com/Rakoon12/D3js-uk-political-donations/master/photos/" + donor + ".ico";
-	
-	// *******************************************
-	
+	// image url that want to check
+	var imageFile = "https://raw.githubusercontent.com/Rakoon12/D3js-uk-political-donations/master/photos/" + donor + ".ico";
+
 	
 	
 	// *******************************************
@@ -343,7 +329,7 @@ function mouseover(d, i) {
 	
 
 	
-	
+
 	
 	var infoBox = "<p> Source: <b>" + donor + "</b> " +  "<span><img src='" + imageFile + "' height='42' width='42' onError='this.src=\"https://github.com/favicon.ico\";'></span></p>" 	
 	
