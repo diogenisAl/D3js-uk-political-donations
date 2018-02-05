@@ -335,29 +335,7 @@ function mouseover(d, i) {
 	
 	// *******************************************
 	
-	function checkImageExists(imageUrl, callBack) {
-	var imageData = new Image();
-	imageData.onload = function() {
-	callBack(true);
-	};
-	imageData.onerror = function() {
-	callBack(false);
-	};
-	imageData.src = imageUrl;
-	}
-
-	// image url that want to check
-	var imageFile = "https://raw.githubusercontent.com/Rakoon12/D3js-uk-political-donations/master/photos/" + donor + ".ico";
-
-	checkImageExists(imageFile, function(existsImage) {
-	if(existsImage == true) {
-	// image exist
-	}
-	else {
-	// image does not exist
-	imageFile = 'https://github.com/favicon.ico';
-	}
-	});
+	
 	
 	// *******************************************
 	
